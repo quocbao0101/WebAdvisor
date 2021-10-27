@@ -1,0 +1,13 @@
+.filter-a{
+	text-align: center;
+	margin-left: 20%;
+}
+.rounded-circle {
+  border-radius: 50% !important;
+}
+
+.img-profile {
+  height: 2rem;
+  width: 2rem;
+}
+
