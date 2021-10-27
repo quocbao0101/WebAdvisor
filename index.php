@@ -109,6 +109,8 @@
         </div>
         <!-- Favourite Places End -->
   
-
+    </main>
+    <?php include "include/footer.php" ?>    
+    </body>
 
 </html>
