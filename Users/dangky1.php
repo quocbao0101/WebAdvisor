@@ -1,7 +1,7 @@
 <?php 
 include "../database/data.php";
  ?>
- <?php include "preloader.php"; ?>
+  <?//php include "preloader.php"; ?>
 
 
 <head>
@@ -31,7 +31,7 @@ include "../database/data.php";
   <?php include "header.php"; ?>
     <div class="login-form">
      
-     <form method="POST" action="dangky.php" class="container justify-content-between text-center single-footer-caption mb-50">
+     <form method="POST" action="dangky1.php" class="container justify-content-between text-center single-footer-caption mb-50">
      <h2>Đăng Ký Tài Khoản</h2>
      <div class="form-group ">
        <input type="text" class="col-lg-4 btn-lg" placeholder="Tài khoản " name="user"  >
@@ -57,10 +57,11 @@ include "../database/data.php";
        <input type="email" class="col-lg-4 btn-lg" placeholder="Email" name="email">
        <i class="fa fa-lock"></i>
      </div>
-     <input type="submit" name="btn_dangky" class="btn btn-secondary btn-lg active" class="log-btn" value="Đăng ký">
-      <i><a href="index.php" class="btn btn-secondary btn-lg active"> Thoát</a></i>
-     <p style="color: red">
+     <input type="submit" name="btn_dangky" class="btn btn-lg active" class="log-btn" value="Đăng ký">
+      <i><a href="../index.php" class="btn btn-secondary btn-lg active"> Thoát</a></i>
+      <p style="color: darkred">
       <?php
+             
             if(isset($_POST['btn_dangky']))
             {
               $taikhoan = $_POST['user'];
@@ -73,23 +74,56 @@ include "../database/data.php";
                    // kết nối tới máy chủ SQL của Xampp
               $caulenh_kiemtra = "select * from users where taikhoan='".$taikhoan."'"; // Câu lệnh
               $ketqua_kiemtra = mysqli_query($conn,$caulenh_kiemtra); // Thực thi câu lệnh 
-              if($matkhau == $nlmatkhau)
+              $uppercase = preg_match('@[A-Z]@', $matkhau);
+              $lowercase = preg_match('@[a-z]@', $matkhau);
+              $number    = preg_match('@[0-9]@', $matkhau);
+              $checkmail = "SELECT * FROM users WHERE email = '".$email."'";
+              $kq = mysqli_query($conn,$checkmail);
+             
+              if (!$taikhoan || !$matkhau || !$ho || !$ten || !$email)
+              {
+                    
+                    echo '(*) Vui lòng nhập đầy đủ thông tin';
+                    
+                      
+              }                 
+              if(!$uppercase || !$lowercase || !$number || strlen($matkhau) < 6) {
+                    // tell the user something went wrong
+                  
+                    
+                    echo '(*) Mật khẩu của bạn không hợp lệ';
+                    
+              }
+              if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+              {
+                    
+                    echo '(*) Email của bạn không hợp lệ';
+                    
+                      
+              }
+              if ($matkhau == $nlmatkhau)
               {
                   if(mysqli_num_rows($ketqua_kiemtra)>=1)
+                  {                   
+                    echo '(*) Tài khoản của bạn đã bị trùng';                 
+                  }
+                  else if(mysqli_num_rows($kq)>=1)
                   {
-                      echo "(*) Tài khoản này đã tồn tại.";
+                    echo '(*) Email của bạn đã bị trùng';
                   }
                   else
                   {                                     
                     $caulenh = "INSERT INTO users(taikhoan,matkhau,idphanquyen,ho,ten,email) values('".$taikhoan."','".$matkhau."','1','".$ho."','".$ten."','".$email."')";
                     $ketqua =  mysqli_query($conn,$caulenh);  
-                    echo "(*) Đăng ký thành công";
+                    echo 'Đăng ký tài khoản thành công';
                   }
               }
-              else echo "(*) Vui lòng kiểm tra lại tài khoản hoặc mật khẩu.";
+              else echo '(*) Vui lòng kiểm tra lại tài khoản hoặc mật khẩu.';
            }
+           
       ?></p>
 </div>
+
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
         <script src="js/index.js"></script>
     </form>

@@ -1,4 +1,4 @@
-<footer>
+<footer style="margin-top: 5%;">
         
         <div class="footer-area footer-padding footer-bg" data-background="../assets/img/service/footer_bg.jpg">
                 <div class="container">

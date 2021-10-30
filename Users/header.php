@@ -40,7 +40,7 @@
         <!-- Header Start -->
        <div class="header-area">
             <div class="main-header ">
-               <div class="header-bottom  header-sticky" style="background-color:white;margin-bottom: 2%;">
+               <div class="header-bottom  header-sticky" style="background-color:white;margin-bottom: 4%;">
                     <div class="container">
                         <div class="row align-items-center">
                             <!-- Logo -->

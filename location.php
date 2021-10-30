@@ -9,16 +9,18 @@
     </header>
 
 
-<script type="text/javascript" src="assets/js/jquery-3.6.0.min.js"></script>  
+<script type="text/javascript" src="assets/js/jquery-3.6.0.min.js"></script>
+
 <div class="container" style="margin-top: 10%;  width: 50%; height: 50%; ">
+                    
     <div class="row">
         <div class="col-md-12">
                 <h2>Địa điểm du lịch</h2>  
                 <?php include "action/search.php"; ?>  
-          </div>
         </div>
     </div>
 </div>
+
     <main>
         <div class="favourite-place place-padding">
             <div class="container">

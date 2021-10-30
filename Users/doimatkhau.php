@@ -2,7 +2,7 @@
  include "../database/data.php";
  $id = $_SESSION['id'];  
 
- $lenh= "select * from users where ID = '".$id."'";
+ $lenh= "SELECT * FROM users WHERE ID = '".$id."'";
  $kq = mysqli_query($conn,$lenh) or die('Khong chay dc');
  $dong = mysqli_fetch_array($kq);
 ?>
@@ -38,7 +38,7 @@
                         }
                         else
                         {
-                            $caulenh = "UPDATE users set matkhau = ".$matkhau." WHERE id = $id";
+                            $caulenh = "UPDATE users set matkhau = '".$matkhau."' WHERE id = ".$id."";
                             mysqli_query($conn,$caulenh);
                             echo "Đổi mật khẩu thành công.";
                         }
