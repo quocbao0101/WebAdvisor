@@ -1,92 +1,71 @@
+<?php 
+include "database/data.php";
+ ?>
 <!doctype html>
 <html class="no-js" lang="zxx">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Travel</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="manifest" href="site.webmanifest">
-		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-
-		<!-- CSS here -->
-            <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-            <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-            <link rel="stylesheet" href="assets/css/flaticon.css">
-            <link rel="stylesheet" href="assets/css/slicknav.css">
-            <link rel="stylesheet" href="assets/css/animate.min.css">
-            <link rel="stylesheet" href="assets/css/magnific-popup.css">
-            <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-            <link rel="stylesheet" href="assets/css/themify-icons.css">
-            <link rel="stylesheet" href="assets/css/slick.css">
-            <link rel="stylesheet" href="assets/css/nice-select.css">
-            <link rel="stylesheet" href="assets/css/style.css">
-   </head>
 
    <body>
-    <!-- Preloader Start -->
-    <div id="preloader-active">
-        <div class="preloader d-flex align-items-center justify-content-center">
-            <div class="preloader-inner position-relative">
-                <div class="preloader-circle"></div>
-                <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/logo.png" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Preloader Start -->
+        <?php include "include/preloader.php" ?>
     <header>
-        <!-- Header Start -->
-        <?php include "../include/header.php" ?>
-        <!-- Header End -->
+        <?php include "include/header.php" ?>
     </header>
 
 
+<script type="text/javascript" src="assets/js/jquery-3.6.0.min.js"></script>
+<div class="slider-area ">
+            <!-- Mobile Menu -->
+            <div class="slider-active">
+                <div class="single-slider hero-overly  slider-height d-flex align-items-center" data-background="assets/img/hero/image1.jpg">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-12">
+                                <div class="hero__caption text-center">
+                                    <h1 style="  color:white; magin: bottom 10px;  ">CHUYÊN MỤC KHÁCH SẠN<span></span> </h1>
+                                    <br>
+                                    <a style="font-size: 50px; color:white ">Những Điểm Dừng Chân Uy Tín Cho Bạn</a>
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Search Box -->
+                        
+                    </div>
+                </div>
+            </div>
+</div>
+<div class="container" style="margin-top: 10%;  width: 50%; height: 50%; ">
+                    
+    <div class="row">
+        <div class="col-md-12">
+                <?php include "action/search_hotel.php"; ?>  
+        </div>
+    </div>
+</div>
+    <main>
+        <div class="favourite-place place-padding">
+            <div class="container">
+                <!-- Section Tittle -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-tittle" style="margin-bottom:5%">
+                                                        <?php if(isset($_SESSION['id']))
+                            { 
+                              echo '<a class="btn" href="Users/themkhachsan.php">Cùng Chia Sẽ Khách Sạn Uy Tín</a>';  ?>
+                             
+                         <?php }
+                         else{} ?>
+                             
+                        </div>
+                    </div>
+                </div>
+                
+                <?php include "action/itemhotel.php"; ?>
+            </div>
+        </div>
+    </main>
 
 
 
-
-
-
-
-
-
-    <!-- JS here -->
-    
-        <!-- All JS Custom Plugins Link Here here -->
-        <script src="assets/js/vendor/modernizr-3.5.0.min.js"></script>
-        
-        <!-- Jquery, Popper, Bootstrap -->
-        <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
-        <script src="assets/js/popper.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-        <!-- Jquery Mobile Menu -->
-        <script src="assets/js/jquery.slicknav.min.js"></script>
-
-        <!-- Jquery Slick , Owl-Carousel Plugins -->
-        <script src="assets/js/owl.carousel.min.js"></script>
-        <script src="assets/js/slick.min.js"></script>
-        <!-- One Page, Animated-HeadLin -->
-        <script src="assets/js/wow.min.js"></script>
-        <script src="assets/js/animated.headline.js"></script>
-        <script src="assets/js/jquery.magnific-popup.js"></script>
-
-        <!-- Scrollup, nice-select, sticky -->
-        <script src="assets/js/jquery.scrollUp.min.js"></script>
-        <script src="assets/js/jquery.nice-select.min.js"></script>
-        <script src="assets/js/jquery.sticky.js"></script>
-        
-        <!-- contact js -->
-        <script src="assets/js/contact.js"></script>
-        <script src="assets/js/jquery.form.js"></script>
-        <script src="assets/js/jquery.validate.min.js"></script>
-        <script src="assets/js/mail-script.js"></script>
-        <script src="assets/js/jquery.ajaxchimp.min.js"></script>
-        
-        <!-- Jquery Plugins, main Jquery -->    
-        <script src="assets/js/plugins.js"></script>
-        <script src="assets/js/main.js"></script>
-        
+    <?php include "include/footer.php" ?>    
     </body>
 </html>

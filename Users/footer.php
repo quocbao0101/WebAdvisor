@@ -1,4 +1,4 @@
-<footer>
+<footer style="margin-top: 5%;">
         
         <div class="footer-area footer-padding footer-bg" data-background="../assets/img/service/footer_bg.jpg">
                 <div class="container">
@@ -47,8 +47,7 @@
                                 <div class="footer-tittle">
                                     <h4>GIẤP PHÉP</h4>
                                     <ul>
-                                     <li><a href="#"><img src="assets/img/logo/icon1.png" alt=""></a></li>
-                                     <li><a href="#"><img src="assets/img/logo/icon2.png" alt=""></a></li>
+
                                      
                                  </ul>
                                 </div>
@@ -65,7 +64,9 @@
         <script src="../assets/js/vendor/modernizr-3.5.0.min.js"></script>
         
         <!-- Jquery, Popper, Bootstrap -->
-        <script src="../assets/js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
         <script src="../assets/js/popper.min.js"></script>
         <script src="../assets/js/bootstrap.min.js"></script>
         <!-- Jquery Mobile Menu -->

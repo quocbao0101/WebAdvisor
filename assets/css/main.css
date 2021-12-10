@@ -1,6 +1,17 @@
+.column {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 .filter-a{
-	text-align: center;
-	margin-left: 20%;
+  text-align: center;
+  margin-left: 20%;
 }
 .rounded-circle {
   border-radius: 50% !important;
@@ -11,3 +22,193 @@
   width: 2rem;
 }
 
+div.stars {
+  display: inline-block;
+}
+ 
+input.star { 
+  display: none; 
+  }
+ 
+label.star {
+  float: right;
+  font-size: 40px;
+  padding: 3px;
+  color: #444;
+  transition: all .2s;
+}
+ 
+
+ input.star:checked ~ label.star:before {
+  content: '\f005';
+  color: #FF9900;
+  transition: all .25s;
+}
+
+
+ 
+label.star:before {
+  content: '\f006';
+  font-family: FontAwesome;
+}
+
+.heade {
+  position: relative;
+  height: 20px;
+  min-height: 25rem;
+  width: 100%;
+  overflow: hidden;
+}
+
+.heade video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 0;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.heade .container {
+  position: relative;
+  z-index: 2;
+  padding: 150px;
+}
+
+.heade .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+/* Media Query for devices withi coarse pointers and no hover functionality */
+
+/* This will use a fallback image instead of a video for devices that commonly do not support the HTML5 video element */
+
+@media (pointer: coarse) and (hover: none) {
+  .heade {
+    background: url('https://source.unsplash.com/XT5OInaElMw/1600x900') black no-repeat center center scroll;
+  }
+
+  .heade video {
+    display: none;
+  }
+}
+
+
+
+div.xh_dichvus {
+  display: inline-block;
+}
+ 
+input.xh_dichvu { 
+  display: none; 
+  }
+ 
+label.xh_dichvu {
+  float: right;
+  font-size: 24px;
+  padding: 2px;
+  color: #444;
+  transition: all .2s;
+}
+ 
+
+ input.xh_dichvu:checked ~ label.xh_dichvu:before {
+  content: '\f005';
+  color: #FF9900;
+  transition: all .25s;
+}
+
+label.xh_dichvu:before {
+  content: '\f006';
+  font-family: FontAwesome;
+}
+
+
+/* Địa điểm */
+div.xh_diadiems {
+  display: inline-block;
+}
+ 
+label.xh_diadiem:before {
+  content: '\f006';
+  font-family: FontAwesome;
+}
+
+
+input.xh_diadiem { 
+  display: none; 
+  }
+ 
+label.xh_diadiem {
+  float: right;
+  font-size: 24px;
+  padding: 2px;
+  color: #444;
+  transition: all .2s;
+}
+ 
+
+ input.xh_diadiem:checked ~ label.xh_diadiem:before {
+  content: '\f005';
+  color: #FF9900;
+  transition: all .25s;
+}
+
+
+ 
+label.xh_diadiem:before {
+  content: '\f006';
+  font-family: FontAwesome;
+}
+
+
+
+/* Sạch sẽ */
+div.xh_sachses {
+  display: inline-block;
+}
+ 
+label.xh_sachse:before {
+  content: '\f006';
+  font-family: FontAwesome;
+}
+
+
+input.xh_sachse { 
+  display: none; 
+  }
+ 
+label.xh_sachse {
+  float: right;
+  font-size: 24px;
+  padding: 2px;
+  color: #444;
+  transition: all .2s;
+}
+ 
+
+ input.xh_sachse:checked ~ label.xh_sachse:before {
+  content: '\f005';
+  color: #FF9900;
+  transition: all .25s;
+}
+
+
+ 
+label.xh_sachse:before {
+  content: '\f006';
+  font-family: FontAwesome;
+}

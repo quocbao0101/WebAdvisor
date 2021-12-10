@@ -1,0 +1,134 @@
+// Default styling
+// -----------------------------------------------------------------------------
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,300,700);
+
+%clearfix {
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+%link-style {
+  color: tomato;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    color: darken(tomato, 20%);
+    text-decoration: underline;
+  }
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  color: black;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 62.5%;
+  line-height: 1;
+}
+
+body {
+  height: 100%;
+  padding: 3em;
+  font-size: 1.4rem;
+  overflow-x: hidden;
+  background-color: lightGray;
+}
+
+a { @extend %link-style; }
+
+
+
+// Basic breadcrumb styles
+// -----------------------------------------------------------------------------
+
+.breadcrumb {
+  display: inline-block;
+  position: relative;
+  margin-top: 0.25em; // Allows for breadcrumb wrapping
+  margin-right: 0.5em;
+  margin-bottom: 0.25em; // Allows for breadcrumb wrapping
+  padding: 0.5em;
+  background-color: white;
+  color: gray;
+  white-space: nowrap;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 100%;
+    border-width: 1em 0.25em 1em 0.5em;
+    border-style: solid;
+    border-color: transparent transparent transparent white;
+  }
+
+  + .breadcrumb {
+    margin-left: 0.75em;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 100%;
+      border-width: 1em 0.25em 1em 0.5em;
+      border-style: solid;
+      border-color: white white white transparent;
+    }
+  }
+}
+
+
+
+// Less specific way of building breadcrumbs. Doesn't matter what elements
+// or classes you use, as long as the root class is applied to a container.
+// -----------------------------------------------------------------------------
+
+//.breadcrumbs {
+//  > * {
+//    display: inline-block;
+//    float: left;
+//    position: relative;
+//    margin-top: 0.25em; // Allows for breadcrumb wrapping
+//    margin-right: 0.5em;
+//    margin-bottom: 0.25em; // Allows for breadcrumb wrapping
+//    padding: 0.5em;
+//    background-color: white;
+//    color: gray;
+//    white-space: nowrap;
+//  }
+//  
+//  > *:after {
+//    content: '';
+//    position: absolute;
+//    top: 0;
+//    left: 100%;
+//    border-width: 1em 0.25em 1em 0.5em;
+//    border-style: solid;
+//    border-color: transparent transparent transparent white;
+//  }
+//
+//  > * + * {
+//    margin-left: 0.75em;
+//
+//    &:before {
+//      content: '';
+//      position: absolute;
+//      top: 0;
+//      right: 100%;
+//      border-width: 1em 0.25em 1em 0.5em;
+//      border-style: solid;
+//      border-color: white white white transparent;
+//    }
+//  }

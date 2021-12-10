@@ -2,7 +2,7 @@
    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 <!-- Sidebar - Brand -->
-<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="http://localhost:8080/Travel/Admin/index.php">
   <div class="sidebar-brand-icon rotate-n-15">
     <i ></i>
   </div>
@@ -14,7 +14,7 @@
 
 <!-- Nav Item - Dashboard -->
 <li class="nav-item active">
-  <a class="nav-link" href="index.php">
+  <a class="nav-link" href="http://localhost:8080/Travel/Admin/index.php">
     <i class="fas fa-fw fa-tachometer-alt"></i>
     <span>Trang Chủ</span></a>
 </li>
@@ -35,8 +35,9 @@
   </a>
   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
-      <a class="collapse-item" href="http://localhost/Travel/Admin/diadiemdulich/index.php">Địa Điểm Du Lịch</a>
-      <a class="collapse-item" href="cards.html">Quản Lý Khách Sạn</a>
+      <a class="collapse-item" href="http://localhost:8080/Travel/Admin/diadiemdulich/index.php">Địa Điểm Du Lịch</a>
+      <a class="collapse-item" href="http://localhost:8080/Travel/Admin/khachsan/index.php">Quản Lý Khách Sạn</a>
+      <a class="collapse-item" href="http://localhost:8080/Travel/Admin/hinhanh/index.php">Quản Lý Hình Ảnh</a>
     </div>
   </div>
 </li>
@@ -62,7 +63,7 @@
 
 <!-- Nav Item - Charts -->
 <li class="nav-item">
-  <a class="nav-link" href="http://localhost/Travel/Admin/users/index.php">
+  <a class="nav-link" href="http://localhost:8080/Travel/Admin/users/index.php">
     <i class="fas fa-fw fa-chart-area"></i>
     <span >Quản Lý Tài Khoản</span></a>
 </li>
@@ -115,23 +116,34 @@
                     {
 
                         $hoten = $_SESSION['ho'] ." ". $_SESSION['ten'];
+                        $avatar = $_SESSION['avatar'];
                         echo $_SESSION['idphanquyen'];
                         echo $hoten;
                     }
-                    else header('location:../');
+                    else  echo "
+                        <script> 
+                          window.location.href = '../';
+                        </script>";
                 }
-                else header('location:../');
+                else  echo "
+                        <script> 
+                          window.location.href = '../';
+                        </script>";
                 ?>
                 </span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                <img class="img-profile rounded-circle" src="<?php
+                    if($_SESSION['avatar'] == NULL) 
+                    {
+                        echo 'https://www.hoteljob.vn/cong-dong/frontend/images/default_avatar.png';
+                    }
+                    else 
+                    {                                                   
+                      echo 'http://localhost:8080/Travel/assets/img/avatar/'.$avatar.'';
+                    } 
+                ?>">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
-                </a>
-                <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Đăng xuất
@@ -156,18 +168,18 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Bạn đã sẵn sàng khỏi đây?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-body">Bạn muốn kết thúc phiên, vui lòng bấm vào nút  "Đăng xuất" bên dưới </div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
 
-          <form action="http://localhost/Travel/Users/logout.php" method="POST"> 
+          <form action="http://localhost:8080/Travel/Users/logout.php" method="POST"> 
           
-            <button type="submit" name="logout_btn" class="btn btn-primary">Logout</button>
+            <button type="submit" name="logout_btn" class="btn btn-primary">Đăng xuất</button>
 
           </form>
 

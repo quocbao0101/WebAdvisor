@@ -1,43 +1,10 @@
 <?php
     include "../database/data.php";
-    if(isset($_SESSION['otp']) && isset($_SESSION['email']))
-    {
+?>
 
-        if(isset($_POST['submit']))
-        {
-            $code_otp = $_SESSION['otp'];
-            $email = $_SESSION['email'];
-            $password = $_POST['password'];
-            $repassword = $_POST['repassword'];
-            $code = substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNM'),0,6);
-            if($password == $repassword)
-            {
-                $sql = "UPDATE users set matkhau = '$password' where code = '$code_otp' AND email = '$email'";
-                $result = mysqli_query($conn,$sql) or die('Error');
-                if($result)
-                {
-                    
-                    $sql1 = "UPDATE users set code = '$code' where email = '$email'";
-                    mysqli_query($conn,$sql1);
-                    echo '<script>
-                        alert("Đổi mật khẩu thành công.");
-                        window.location.href="dangnhap.php"
-                    </script>';
-                }
-                else{
-                    echo 'Doi mat khau that bai';
-                }
-            }
-            else echo 'Mat khau ban vua nhap khong dung';
-        }
-    } 
-    else {
-        echo 
-        "<script>                 
-                window.location.href='forgot_password.html';
-        </script>";
-    }
-    
+
+<?php 
+include "header.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,32 +13,101 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đổi mật khẩu</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container p-3 border border-5 rounded-3" style="width: 40%">
-        <h1 class="display-6 text-center p-2 bg-light">
+    <div class="container col-xl-4 justify-content-between text-center single-footer-caption mb-50 border border-5 rounded-3" style=" border-radius : 20px; margin-bottom: 20%; padding : 40px; box-shadow: 3px 3px 3px #AAA;">
+        <h1 style="margin-bottom: 5%;">
             Đổi mật khẩu
         </h1>
         <form action="" method="post">
-            <div class="row mb-3 justify-content-md-center">
-                <label for="inputEmail" class="col-4 col-form-label">Mật khẩu</label>
-                <div class="col-lg-auto">
-                    <input type="password" name="password"  class="form-control">
-                </div>
+            <div class="form-group single-footer-caption mb-50">
+                    <input type="password" placeholder="Mật khẩu"  name="password"  class="col-lg-8 btn-lg" required>
             </div>
-            <div class="row mb-3 justify-content-md-center">
-                <label for="inputEmail" class="col-4 col-form-label">Nhập lại mật khẩu</label>
-                <div class="col-lg-auto">
-                    <input type="password" name="repassword"  class="form-control">
-                </div>
+            <div class="form-group single-footer-caption mb-50">
+                    <input type="password" placeholder="Nhập lại mật khẩu" name="repassword"  class="col-lg-8 btn-lg" required>
             </div>
-            <div class="row mb-3 justify-content-md-center">
-                <div class="col-8">
-                    <input type="submit" class="btn btn-primary" name="submit" value="Xác nhận"></button>
-                </div>
-            </div>
+            <input type="submit" class="btn btn-primary" name="submit" value="Xác nhận"></button>
+            <i><a href="../index.php" class="btn btn-secondary btn-lg active" > Thoát</a></i>
         </form>
+            <?php
+        if(isset($_SESSION['otp']) && isset($_SESSION['email']))
+        {
+
+            if(isset($_POST['submit']))
+            {
+                $code_otp = $_SESSION['otp'];
+                $email = $_SESSION['email'];
+                $password = $_POST['password'];
+                $repassword = $_POST['repassword'];
+                $uppercase = preg_match('@[A-Z]@', $password);
+                $lowercase = preg_match('@[a-z]@', $password);
+                $number    = preg_match('@[0-9]@', $password);
+                $code = substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNM'),0,6);
+
+                if (!$password || !$repassword)
+                {
+                      echo '<div class="alert alert-danger" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <strong>Đăng ký thất bại!</strong> Vui lòng nhập đầy đủ thông tin!
+                      </div>
+                      ';                    
+                }                 
+                else if(!$uppercase || !$lowercase || !$number || strlen($password) < 6) {
+                      echo '<div class="alert alert-danger" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <strong>Đăng ký thất bại!</strong> Mật khẩu của bạn không hợp lệ (Bao gồm hơn 6 ký tự lẫn chữ hoa và thường)!
+                      </div>
+                      ';    
+                        
+                }
+                else
+                {
+                    if($password == $repassword)
+                    {
+                        $sql = "UPDATE users set matkhau = '$password' where code = '$code_otp' AND email = '$email'";
+                        $result = mysqli_query($conn,$sql) or die('Error');
+                        if($result)
+                        {
+                            
+                            $sql1 = "UPDATE users set code = '$code' where email = '$email'";
+                            mysqli_query($conn,$sql1);
+                            echo '<script>
+                                alert("Đổi mật khẩu thành công.");
+                                window.location.href="logout.php"
+                            </script>';
+                        }
+                        else{
+                        echo '<div class="alert alert-danger" role="alert">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <strong>Đổi mật khẩu thất bại!</strong> 
+                          </div>
+                          ';   
+                        }
+                    }
+                    else                       echo '<div class="alert alert-danger" role="alert">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <strong>Thất bại</strong> Mật khẩu bạn vừa nhập không trùng với nhau!
+                          </div>
+                          ';   
+                    }
+            }
+        } 
+        else {
+            echo 
+            "<script>                 
+                    window.location.href='forgot_password.html';
+            </script>";
+        } 
+    ?>
     </div>
+
 </body>
 </html>
+<?php include "footer.php" ?>
+<script type="text/javascript">
+      window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 5000);
+</script>

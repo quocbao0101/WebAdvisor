@@ -58,7 +58,10 @@
 
         }
         else {
-            echo 'Email của bạn chưa được đăng ký';
+            echo "<script>
+                    alert('Email của bạn chưa đăng ký.');
+                    window.location.href='forgot_password.php';
+            </script>";
         }
         $conn->close();
     

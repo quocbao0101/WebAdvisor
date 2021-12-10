@@ -12,8 +12,26 @@
     $sodong = mysqli_num_rows($ketqualenhdem);
     $sotrangdl = $sodong / $sodongtrentrang;
     $vitribatdau = $trang * $sodongtrentrang;
-    $lenhphantrang = "SELECT users.ID,code,email,tenphanquyen,taikhoan,matkhau,ho,ten,lancuoidangnhap from users,phanquyen WHERE users.idphanquyen = phanquyen.ID ";
-    $ketquaphantrang = mysqli_query($conn,$lenhphantrang);
+    if(isset($_GET['key']))
+    {      
+        $key = $_GET['key'];
+        if($key != NULL)
+        {
+            $lenhphantrang = "SELECT users.ID,code,email,tenphanquyen,taikhoan,matkhau,ho,ten,lancuoidangnhap from users,phanquyen WHERE users.idphanquyen = phanquyen.ID AND taikhoan LIKE '%$key%' LIMIT {$vitribatdau},{$sodongtrentrang}";
+            $ketquaphantrang = mysqli_query($conn,$lenhphantrang);
+        }
+        else
+        {
+            $lenhphantrang = "SELECT users.ID,code,email,tenphanquyen,taikhoan,matkhau,ho,ten,lancuoidangnhap from users,phanquyen WHERE users.idphanquyen = phanquyen.ID LIMIT {$vitribatdau},{$sodongtrentrang} ";
+            $ketquaphantrang = mysqli_query($conn,$lenhphantrang);
+        }
+    }
+    else
+    {        
+        $lenhphantrang = "SELECT users.ID,code,email,tenphanquyen,taikhoan,matkhau,ho,ten,lancuoidangnhap from users,phanquyen WHERE users.idphanquyen = phanquyen.ID LIMIT {$vitribatdau},{$sodongtrentrang} ";
+        $ketquaphantrang = mysqli_query($conn,$lenhphantrang);
+    }
+
  
 ?>
 
@@ -93,14 +111,19 @@ include('../assets/includes/navbar.php');
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Quản lý tài khoản 
 
-    </h6>
+    <h1 class="m-0 font-weight-bold text-primary">Quản Lý Tài Khoản </h1>
+    <form action="search.php" method="POST">
+        <input type="text" name="txtSearch" style="width: 20%;float: left;" class="form-control">
+        <input type="submit" name="btn_search" style="float:left;"  class="btn btn-info" value="Tìm kiếm">  
+    </form>
+    
+
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addadminprofile" style="float: right;">
               Thêm mới tài khoản 
             </button>
     <form action="delete.php" method="POST">
-    <input type="submit" name="btn_delete" style="margin-right: 1%;float:right;" class="btn btn-info" value="Xóa tài khoản">
+    <input type="submit" name="btn_delete" style="margin-right: 1%;float:right;" class="btn btn-danger" value="Xóa tài khoản">
 
      
   </div>
@@ -111,16 +134,16 @@ include('../assets/includes/navbar.php');
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Tên đăng nhập</th>
-            <th>Mật khẩu</th>
-            <th>Email</th>
-            <th>Phân quyền</th>
-            <th>Họ tên</th>
-            <th>Lần cuối đăng nhập</th>
-            <th>Code</th>
-            <th>Sửa</th>
-
+            <th class="font-weight-bold text-primary text-center">ID</th>
+            <th class="font-weight-bold text-primary text-center">Tên đăng nhập</th>
+            <th class="font-weight-bold text-primary text-center">Mật khẩu</th>
+            <th class="font-weight-bold text-primary text-center">Email</th>
+            <th class="font-weight-bold text-primary text-center">Phân quyền</th>
+            <th class="font-weight-bold text-primary text-center">Họ tên</th>
+            <th class="font-weight-bold text-primary text-center">Lần cuối đăng nhập</th>
+            <th class="font-weight-bold text-primary text-center">Code</th>
+            <th class="font-weight-bold text-primary text-center">Sửa</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -137,8 +160,8 @@ include('../assets/includes/navbar.php');
                     <td><?php echo $row['ho'].' '.$row['ten'];?></td>
                     <td><?php echo $row['lancuoidangnhap'];?></td>
                     <td><?php echo $row['code'];?></td>
-                    <td>
-                        <a class="icon-btn" href="edit.php?ID=<?php echo $row['ID']; ?>"><i class="fas fa-edit">Sửa</i></a>
+                    <td class="text-center">
+                        <a class="btn btn-info" href="edit.php?ID=<?php echo $row['ID']; ?>"><i class="fas fa-edit">Sửa</i></a>
                     </td>
                     <td >
                         <input type="checkbox" name="num[]" value="<?php echo $row['ID'];  ?>">
@@ -150,15 +173,17 @@ include('../assets/includes/navbar.php');
       </table>
       </form>
 
-    <div class="pagination__container" style="float: left;margin-left: 50%;">
-                <ul class="pagination">
-                    <?php
-                    for ($i = 0; $i <= $sotrangdl; $i++){
-                            $t = $i + 1;
-                            echo "<li class='page'><a href='index.php?trang=".$i."'>".$t."</a></li>";
-                    }    ?>
-                </ul>
-    </div> 
+        <div style="margin-left: 50%;">
+                <div class="pagination">
+                    <ul class="pagination font-weight-bold text-primary">
+                            <?php
+                            for ($i = 0; $i <= $sotrangdl; $i++){
+                                    $t = $i + 1;
+                                    echo "<li class='page-item'><a  class='page-link' href='index.php?trang=".$i."'>".$t."</a></li>";
+                            }    ?>
+                    </ul>
+                </div>
+        </div>
     </div>
   </div>
 </div>

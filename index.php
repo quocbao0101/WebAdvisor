@@ -5,7 +5,7 @@
 
    <body>
     <!-- Preloader Start -->
-    <?php include "include/preloader.php" ?>
+    <?php  include "include/preloader.php" ?>
     <?php
         include "include/header.php"; 
     ?>
@@ -33,22 +33,6 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-          <div class="col-xl-4" >
-                                <!-- form -->
-                                <form  action="#" class="search-box">
-                                    
-                                    <div style="border-width: thin; border-style: groove;"  class="input-form mb-30">
-                                        <input type="text" placeholder="Bạn muốn đi đâu ?">
-                                    </div>
-
-                                    <div class="search-form">
-                                        <a href="#">Tìm kiếm</a>
-                                    </div>	
-                                   
-                                </form>	
-                            </div>
-                        </div>
         <!-- slider Area End-->
 
         <!-- Favourite Places Start -->
@@ -65,7 +49,7 @@
                 </div>
                 <?php
                     
-                    $sql = "SELECT * FROM diadiemdulich,vung,diadiem,danhmuc WHERE danhmuc.IDDanhMuc = diadiemdulich.IDDanhMuc AND diadiemdulich.IDVUNG = vung.IDVUNG AND diadiem.ID = vung.IDDiaDiem ORDER BY TongDanhGia DESC LIMIT 6";
+                    $sql = "SELECT * FROM diadiemdulich,vung,diadiem,danhmuc WHERE danhmuc.IDDanhMuc = diadiemdulich.IDDanhMuc AND diadiemdulich.IDVUNG = vung.IDVUNG AND diadiem.ID = vung.IDDiaDiem AND pheduyet='1' ORDER BY TongDanhGia DESC LIMIT 6";
                     $result = mysqli_query($conn,$sql);
                 ?>
                 <div class="row">
@@ -82,9 +66,9 @@
 
 
                     <div class="col-xl-4 col-lg-4 col-md-6">
-                        <div class="single-place mb-30">
+                        <div class="single-place mb-30 card-header">
                             <div class="place-img">
-                                <img style="height: 350px;width: 350px" src="assets/img/service/<?php echo $row1['image']; ?>" alt="">
+                                <img style="height: 350px;width: 100%" src="assets/img/service/<?php echo $row1['image']; ?>" alt="">
                             </div>
                             <div class="place-cap">
                                 <div class="place-cap-top">
@@ -95,7 +79,7 @@
                                 </div>
                                 <div class="place-cap-bottom">
                                     <ul>
-                                        <li><i class="fas fa-map-marker-alt"></i><?php echo $row['TenDiaDiem']; ?></li>
+                                        <li><i class="fas fa-map-marker-alt"></i><?php echo $row['TenDiaDiem']; ?></li><br>
                                         <li><?php if($row['dangmocua'] == true){ echo 'Đang mở cửa';} else echo 'Đóng cửa'; ?></li>
                                     </ul>
                                 </div>
@@ -107,10 +91,68 @@
                 </div>
             </div>
         </div>
+
+   <!-- slider Area End-->
+   <?php  include "include/video.php" ?>
+ 
+        <!-- Favourite Places Start -->
+        <div class="favourite-place place-padding">
+            <div class="container">
+
+                <?php
+                    
+                    $sql_ks = "SELECT * FROM khachsan,vung,diadiem WHERE  khachsan.IDVUNG = vung.IDVUNG AND pheduyet='1' AND diadiem.ID = vung.IDDiaDiem ORDER BY TongDanhGia DESC LIMIT 6";
+                    $result_ks = mysqli_query($conn,$sql_ks) or die("Lỗi");
+                ?>
+                <div class="row">
+                    <?php  
+
+                    while($row_ks = mysqli_fetch_array($result_ks)) { 
+                                    $sql_image_ks = "SELECT * FROM hinhanh WHERE IDKhachSan = '".$row_ks['IDKhachSan']."' LIMIT 1";
+                                    $result_image_ks = mysqli_query($conn,$sql_image_ks);
+                                    $giaca = number_format($row_ks['GiaCa'], 0, '', ',');
+                                    while($row_image = mysqli_fetch_array($result_image_ks))
+                                        {;
+
+                                    ?>
+
+
+
+                    <div class="col-xl-4 col-lg-4 col-md-6">
+                        <div class="single-place mb-30 card-header">
+                            <div class="place-img">
+                                <img style="height: 350px;width: 100%" src="assets/img/service/<?php echo $row_image['image']; ?>" alt="">
+                            </div>
+                            <div class="place-cap">
+                                <div class="place-cap-top">
+                                    <span><i class="fas fa-star"></i><span><?php echo $row_ks['TongDanhGia'] ?> Sao</span> </span>
+
+                                    <h3><a href="detail-hotel.php?khachsan=<?php echo $row_ks['IDKhachSan']; ?>"><?php echo $row_ks['TenKhachSan']; ?></a></h3>                                    <p class="dolor"><span><?php echo $giaca ?> VNĐ</span></p>
+
+                                </div>
+                                <div class="place-cap-bottom">
+                                    <ul>
+                                        <li><i class="fas fa-map-marker-alt"></i><?php echo $row_ks['TenDiaDiem']; ?></li><br>
+                                        <li><?php if($row_ks['dangmocua'] == true){ echo 'Đang mở cửa';} else echo 'Đóng cửa'; ?></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php }
+                } ?>
+                </div>
+            </div>
+        </div>
         <!-- Favourite Places End -->
-  
+
+
+
+
+
+
+
     </main>
     <?php include "include/footer.php" ?>    
     </body>
-
 </html>

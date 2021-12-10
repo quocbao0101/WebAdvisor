@@ -31,7 +31,7 @@
             <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
             <div class="input-group" id="adv-search">
                 <form action="" method="POST" class="input-group">
-                    <input type="text" class="btn-lg active col-md-8" name="keyword" placeholder="Tìm kiếm địa chỉ du lịch">
+                    <input type="text" class="btn-lg active col-md-10" name="keyword" placeholder="Tìm kiếm địa chỉ du lịch">
                     <div class="input-group-btn">
                         <div class="btn-group" role="group">
                             <input type="submit" value="Tìm kiếm" name="btn" class="btn"> 
@@ -39,7 +39,7 @@
                     </div>
                     </div>
             </div>
-            <div class="input-group" style="margin-left: 1.2%;">
+            <div class="input-group" style="margin-left: 0%;">
                 <div class="input-group-btn">
                         <div class="btn-group" role="group">
                                 <select  name="province" id="province" class="btn-secondary btn-lg" >
